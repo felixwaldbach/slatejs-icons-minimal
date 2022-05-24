@@ -1,11 +1,11 @@
-import { Editor, NodeEntry, Transforms, Node, Path } from "slate";
+import { Editor, NodeEntry, Transforms, Node, Path, Element } from "slate";
 import { CustomElement } from "../slate-types/slate";
 import { EMPTY_TEXT } from "./App";
 
 export const withIcons = (editor: Editor): Editor => {
   const {isVoid, normalizeNode} = editor;
 
-  editor.isVoid = (element: CustomElement) => {
+  editor.isVoid = (element) => {
     return element.type === "icon" ? true : isVoid(element);
   };
 
@@ -17,7 +17,7 @@ export const withIcons = (editor: Editor): Editor => {
         path[path.length - 1] === parentNode.children.length - 1;
       const nextPath = Path.next(path);
       if (islastChild) { // If Icon is last, insert empty character after to fix cursor
-        const newNode: CustomElement = {
+        const newNode: Element = {
           type: "paragraph",
           children: [EMPTY_TEXT],
         };
@@ -36,7 +36,7 @@ export const withIcons = (editor: Editor): Editor => {
 };
 
 export const insertIcon = (editor: Editor): void => {
-  const icon: CustomElement = {
+  const icon: Element = {
     type: "icon",
     children: [EMPTY_TEXT],
     icon: "anchor",

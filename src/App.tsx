@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { withReact, Slate, Editable, useSelected, RenderElementProps, useSlate } from "slate-react";
-import { createEditor, Descendant } from "slate";
-import { CustomElement, CustomText } from "../slate-types/slate";
+import { createEditor, Descendant, Text } from "slate";
 import { insertIcon, withIcons } from "./icon-plugin";
 import "./App.css";
 
 // placeholder for empty text w/o line break
 export const EMPTY_CHARACTER = String.fromCharCode(parseInt("2060", 16));
-export const EMPTY_TEXT: CustomText = {
+export const EMPTY_TEXT: Text = {
   text: EMPTY_CHARACTER,
 };
 
@@ -66,7 +65,7 @@ const Icon: React.FC<RenderElementProps> = ({
       {children}
       <i
         contentEditable={false}
-        className={`fa-solid fa-${(element as CustomElement).icon}`}
+        className={`fa-solid fa-${element.icon}`}
         style={{
           display: "inline",
         }}
